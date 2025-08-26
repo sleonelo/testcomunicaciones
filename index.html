@@ -3,454 +3,472 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Curso Interactivo IAMSAR - Comunicaciones (Completo)</title>
+    <title>Curso Interactivo de Comunicaciones SAR - Versión Completa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 20px;
-            background-color: #f4f4f4;
+            font-family: 'Inter', sans-serif;
         }
-        .container {
-            max-width: 800px;
-            margin: auto;
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        .progress-bar-container {
-            width: 100%;
-            background-color: #e0e0e0;
-            border-radius: 5px;
-            margin-bottom: 20px;
-        }
-        .progress-bar {
-            width: 0%;
-            height: 20px;
-            background-color: #4caf50;
-            text-align: center;
-            line-height: 20px;
-            color: white;
-            border-radius: 5px;
-            transition: width 0.4s ease;
-        }
-        .module {
+        .module-content {
             display: none;
         }
-        .module.active {
+        .module-content.active {
             display: block;
         }
-        h1, h2 {
-            color: #333;
-        }
-        .quiz-question {
-            margin-bottom: 15px;
-        }
-        .quiz-options label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        button {
-            background-color: #4caf50;
+        .nav-link.active {
+            background-color: #1E40AF; /* bg-blue-800 */
             color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 10px;
         }
-        button:hover {
-            background-color: #45a049;
+        .progress-bar-fill {
+            transition: width 0.5s ease-in-out;
         }
-        .feedback {
-            margin-top: 10px;
-            font-weight: bold;
+        .quiz-option:hover {
+            background-color: #DBEAFE; /* bg-blue-100 */
+        }
+        .quiz-option.selected {
+            background-color: #BFDBFE; /* bg-blue-200 */
+            border-color: #3B82F6; /* border-blue-500 */
+        }
+        .quiz-option.correct {
+            background-color: #D1FAE5; /* bg-green-100 */
+            border-color: #10B981; /* border-green-500 */
+        }
+        .quiz-option.incorrect {
+            background-color: #FEE2E2; /* bg-red-100 */
+            border-color: #EF4444; /* border-red-500 */
         }
     </style>
 </head>
-<body>
+<body class="bg-gray-100 text-gray-800">
 
-    <div class="container">
-        <h1>Curso Interactivo IAMSAR - Comunicaciones (Completo)</h1>
-        
-        <div class="progress-bar-container">
-            <div class="progress-bar" id="progressBar">0%</div>
-        </div>
+    <div class="flex flex-col md:flex-row min-h-screen">
+        <!-- Barra de Navegación Lateral -->
+        <aside class="w-full md:w-72 bg-gray-800 text-white p-4 md:p-6 flex-shrink-0">
+            <h1 class="text-2xl font-bold mb-6 text-center">Comunicaciones SAR</h1>
+            <nav id="module-nav">
+                <!-- Los enlaces de navegación se generarán aquí -->
+            </nav>
+        </aside>
 
-        <div id="course-content">
-            <!-- Módulo 1 -->
-            <div class="module active" id="module-1">
-                <h2>Módulo 1: Servicio fijo aeronáutico</h2>
-                <p>El servicio fijo aeronáutico es una piedra angular para la coordinación SAR. La Red de Telecomunicaciones Fijas Aeronáuticas (AFTN) y su evolución, la Red de Telecomunicaciones Aeronáuticas (ATN), son redes mundiales que aseguran la transmisión de mensajes prioritarios entre centros de control. Para los Centros Coordinadores de Salvamento (RCC) y los Centros de Control de Misiones (MCC) de Cospas-Sarsat, estas redes son vitales porque ofrecen un medio de comunicación fiable y robusto, especialmente en zonas donde otras formas de comunicación podrían ser menos efectivas. Los enlaces con los Centros Coordinadores de Salvamento Aeronáutico (ARCC) se suelen establecer a través de los servicios disponibles en los Centros de Información de Vuelo (FIC) o los Centros de Control de Área (CCA) más cercanos, garantizando una integración fluida en la infraestructura de comunicación aeronáutica existente.</p>
-                <div class="quiz">
-                    <h3>Test de Autoevaluación</h3>
-                    <div class="quiz-question">
-                        <p>1. ¿Qué redes son fundamentales en el servicio fijo aeronáutico para las comunicaciones SAR?</p>
-                        <div class="quiz-options">
-                            <label><input type="radio" name="q1" value="a"> Internet y redes sociales</label>
-                            <label><input type="radio" name="q1" value="b"> AFTN y ATN</label>
-                            <label><input type="radio" name="q1" value="c"> Redes de telefonía móvil</label>
-                        </div>
+        <!-- Contenido Principal -->
+        <main class="flex-1 p-4 md:p-8 overflow-y-auto">
+            <!-- Barra de Progreso -->
+            <div class="mb-8">
+                <h2 class="text-xl font-semibold mb-2">Progreso del Curso</h2>
+                <div class="w-full bg-gray-300 rounded-full h-6">
+                    <div id="progress-bar" class="bg-blue-600 h-6 text-xs font-medium text-blue-100 text-center p-1 leading-none rounded-full" style="width: 0%">
+                        0%
                     </div>
-                    <div class="quiz-question">
-                        <p>2. ¿Cómo se suelen establecer los enlaces de comunicaciones con un ARCC?</p>
-                        <div class="quiz-options">
-                            <label><input type="radio" name="q2" value="a"> A través de los servicios del FIC o CCA más próximos</label>
-                            <label><input type="radio" name="q2" value="b"> Mediante un enlace satelital directo</label>
-                            <label><input type="radio" name="q2" value="c"> Usando la radio de onda corta</label>
-                        </div>
-                    </div>
-                    <div class="quiz-question">
-                        <p>3. ¿Cuál es la principal ventaja de la AFTN/ATN para los RCC?</p>
-                        <div class="quiz-options">
-                            <label><input type="radio" name="q3" value="a"> Bajo costo</label>
-                            <label><input type="radio" name="q3" value="b"> Capacidad para transmitir video en alta definición</label>
-                            <label><input type="radio" name="q3" value="c"> Fiabilidad para despachar mensajes prioritarios</label>
-                        </div>
-                    </div>
-                     <div class="quiz-question">
-                        <p>4. ¿La OACI ha autorizado el uso de la AFTN/ATN para fines SAR marítimos?</p>
-                        <div class="quiz-options">
-                            <label><input type="radio" name="q4" value="a"> Sí, cuando no se disponga de otros recursos más apropiados</label>
-                            <label><input type="radio" name="q4" value="b"> No, su uso es exclusivamente aeronáutico</label>
-                            <label><input type="radio" name="q4" value="c"> Sí, es el método preferido para todos los casos SAR</label>
-                        </div>
-                    </div>
-                    <button onclick="checkQuiz(1, {'q1': 'b', 'q2': 'a', 'q3': 'c', 'q4': 'a'})">Verificar Respuestas</button>
-                    <div class="feedback" id="feedback-1"></div>
                 </div>
-                <button onclick="nextModule(1)">Siguiente Módulo</button>
             </div>
 
-            <!-- Módulo 2 -->
-            <div class="module" id="module-2">
-                <h2>Módulo 2: Comunicaciones de socorro</h2>
-                <p>El tráfico de socorro abarca todos los mensajes cruciales para la asistencia inmediata a personas, aeronaves o buques en peligro, incluyendo asistencia médica y comunicaciones SAR en el lugar del siniestro. Estas comunicaciones tienen prioridad absoluta sobre cualquier otra transmisión. Quien reciba una llamada de socorro debe cesar de inmediato cualquier transmisión que pueda causar interferencia y ponerse a la escucha. Es fundamental proteger estas comunicaciones contra interferencias perjudiciales. Los alertas pueden llegar al RCC a través de una multitud de canales, incluyendo estaciones costeras (CRS), terminales del sistema Cospas-Sarsat, estaciones terrenas de Inmarsat (LES) y servicios de tránsito aéreo (ATS).</p>
-                <div class="quiz">
-                    <h3>Test de Autoevaluación</h3>
-                    <div class="quiz-question">
-                        <p>1. ¿Qué acción tiene prioridad absoluta sobre todas las demás transmisiones?</p>
-                        <div class="quiz-options">
-                            <label><input type="radio" name="q5" value="a"> Las llamadas de urgencia (PAN-PAN)</label>
-                            <label><input type="radio" name="q5" value="b"> Las llamadas de socorro (MAYDAY)</label>
-                            <label><input type="radio" name="q5" value="c"> Las llamadas de seguridad (SÉCURITÉ)</label>
-                        </div>
-                    </div>
-                    <div class="quiz-question">
-                        <p>2. ¿Qué debe hacer el personal SAR si causa interferencia en una comunicación de socorro?</p>
-                        <div class="quiz-options">
-                            <label><input type="radio" name="q6" value="a"> Ignorarla, ya que tienen prioridad</label>
-                            <label><input type="radio" name="q6" value="b"> Cooperar con las autoridades para denunciar y hacer cesar las interferencias</label>
-                            <label><input type="radio" name="q6" value="c"> Cambiar de frecuencia inmediatamente</label>
-                        </div>
-                    </div>
-                    <div class="quiz-question">
-                        <p>3. ¿Qué es un LUT en el contexto de Cospas-Sarsat?</p>
-                        <div class="quiz-options">
-                            <label><input type="radio" name="q7" value="a"> Un tipo de radiobaliza de emergencia</label>
-                            <label><input type="radio" name="q7" value="b"> Un terminal local de usuario que recibe señales de satélite</label>
-                            <label><input type="radio" name="q7" value="c"> El centro de control principal del sistema</label>
-                        </div>
-                    </div>
-                    <div class="quiz-question">
-                        <p>4. ¿Las aeronaves o buques en peligro pueden usar solo medios de comunicación SAR?</p>
-                        <div class="quiz-options">
-                            <label><input type="radio" name="q8" value="a"> Sí, están restringidos a equipos SAR específicos</label>
-                            <label><input type="radio" name="q8" value="b"> No, pueden utilizar cualquier medio disponible para llamar la atención</label>
-                            <label><input type="radio" name="q8" value="c"> Depende de la región en la que se encuentren</label>
-                        </div>
-                    </div>
-                    <button onclick="checkQuiz(2, {'q5': 'b', 'q6': 'b', 'q7': 'b', 'q8': 'b'})">Verificar Respuestas</button>
-                    <div class="feedback" id="feedback-2"></div>
-                </div>
-                <button onclick="nextModule(2)">Siguiente Módulo</button>
+            <!-- Contenedor de Módulos -->
+            <div id="modules-container">
+                <!-- El contenido de los módulos se generará aquí -->
             </div>
             
-            <!-- Módulo 3 -->
-            <div class="module" id="module-3">
-                <h2>Módulo 3: Servicio móvil aeronáutico</h2>
-                <p>El servicio móvil aeronáutico opera en las bandas de HF (3-30 MHz), VHF (30-300 MHz) y UHF (300-3000 MHz). La comunicación inicial de socorro se hace en la frecuencia en ruta. Si un medio SAR necesita contactar una aeronave en peligro, la frecuencia de contacto inicial suele ser 121,5 MHz para aeronaves civiles o 243 MHz para militares. La frecuencia de 121,5 MHz es crucial y se utiliza para proporcionar un canal expedito entre la aeronave y una estación terrestre, un canal común entre aeronaves y medios de superficie en operaciones SAR, y para localizar la fuente de la señal mediante radiogoniometría.</p>
-                <div class="quiz">
-                    <h3>Test de Autoevaluación</h3>
-                    <div class="quiz-question">
-                        <p>1. ¿En qué frecuencia se realizan normalmente las transmisiones iniciales de socorro aeronáutico?</p>
-                        <div class="quiz-options">
-                            <label><input type="radio" name="q9" value="a"> 121,5 MHz</label>
-                            <label><input type="radio" name="q9" value="b"> En la frecuencia utilizada para las comunicaciones en ruta</label>
-                            <label><input type="radio" name="q9" value="c"> 243 MHz</label>
-                        </div>
-                    </div>
-                    <div class="quiz-question">
-                        <p>2. ¿Qué frecuencia se utiliza como canal común entre aeronaves y medios de superficie en operaciones SAR?</p>
-                        <div class="quiz-options">
-                            <label><input type="radio" name="q10" value="a"> 123,1 MHz</label>
-                            <label><input type="radio" name="q10" value="b"> 121,5 MHz</label>
-                            <label><input type="radio" name="q10" value="c"> 5680 kHz</label>
-                        </div>
-                    </div>
-                    <div class="quiz-question">
-                        <p>3. ¿Qué se puede hacer si se pierden las comunicaciones o el contacto radar con una aeronave?</p>
-                        <div class="quiz-options">
-                            <label><input type="radio" name="q11" value="a"> Esperar a que la aeronave restablezca contacto</label>
-                            <label><input type="radio" name="q11" value="b"> Iniciar los procedimientos SAR</label>
-                            <label><input type="radio" name="q11" value="c"> Intentar contactar por teléfono celular</label>
-                        </div>
-                    </div>
-                    <div class="quiz-question">
-                        <p>4. ¿Para qué puede usarse la radiogoniometría (DF)?</p>
-                        <div class="quiz-options">
-                            <label><input type="radio" name="q12" value="a"> Para medir la altitud de la aeronave</label>
-                            <label><input type="radio" name="q12" value="b"> Para localizar la fuente de una señal de radio</label>
-                            <label><input type="radio" name="q12" value="c"> Para mejorar la calidad de la comunicación de voz</label>
-                        </div>
-                    </div>
-                    <button onclick="checkQuiz(3, {'q9': 'b', 'q10': 'b', 'q11': 'b', 'q12': 'b'})">Verificar Respuestas</button>
-                    <div class="feedback" id="feedback-3"></div>
-                </div>
-                <button onclick="nextModule(3)">Siguiente Módulo</button>
+            <!-- Pantalla de Bienvenida -->
+            <div id="welcome-screen" class="bg-white p-8 rounded-lg shadow-lg text-center">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Bienvenido al Curso Interactivo de Comunicaciones SAR</h2>
+                <p class="text-lg text-gray-600 mb-6">Este curso está basado en el Capítulo 2 del Manual IAMSAR, Volumen II. Aprenderás sobre los procedimientos, equipos y sistemas cruciales para las comunicaciones en operaciones de Búsqueda y Salvamento.</p>
+                <p class="text-gray-600 mb-8">Selecciona un módulo en el menú de la izquierda para comenzar tu aprendizaje.</p>
+                <svg class="w-32 h-32 mx-auto text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
             </div>
 
-            <!-- Módulo 4 -->
-            <div class="module" id="module-4">
-                <h2>Módulo 4: Comunicaciones para Operaciones SAR</h2>
-                <p>La coordinación eficaz de las comunicaciones es crucial en las operaciones SAR. El plan SAR debe publicar las frecuencias disponibles para los canales de control, en el lugar del siniestro, vigilancia y relaciones públicas. El SMC (Coordinador de la Misión SAR) selecciona las frecuencias y las comunica al OSC (Coordinador en el Lugar del Siniestro) y al ACO (Coordinador de Aeronaves). Se debe asignar una frecuencia primaria y otra secundaria. El OSC y/o el ACO controlan las comunicaciones en el lugar del siniestro para garantizar que sean fiables. Todas las SRU (Unidades de Búsqueda y Salvamento) deben llevar una copia del Código Internacional de Señales.</p>
-                <div class="quiz">
-                    <h3>Test de Autoevaluación</h3>
-                    <div class="quiz-question">
-                        <p>1. ¿Quién designa las frecuencias para la operación SAR?</p>
-                        <div class="quiz-options">
-                            <label><input type="radio" name="q13" value="a"> El piloto de la aeronave en peligro</label>
-                            <label><input type="radio" name="q13" value="b"> El SMC (Coordinador de la Misión SAR)</label>
-                            <label><input type="radio" name="q13" value="c"> El capitán del buque más cercano</label>
-                        </div>
-                    </div>
-                    <div class="quiz-question">
-                        <p>2. ¿Quién controla las comunicaciones en el lugar del siniestro?</p>
-                        <div class="quiz-options">
-                            <label><input type="radio" name="q14" value="a"> El SMC desde el RCC</label>
-                            <label><input type="radio" name="q14" value="b"> El OSC y/o el ACO</label>
-                            <label><input type="radio" name="q14" value="c"> La estación costera más próxima</label>
-                        </div>
-                    </div>
-                    <div class="quiz-question">
-                        <p>3. ¿Qué documento importante deben llevar todas las Unidades de Búsqueda y Salvamento (SRU)?</p>
-                        <div class="quiz-options">
-                            <label><input type="radio" name="q15" value="a"> Un mapa de la zona</label>
-                            <label><input type="radio" name="q15" value="b"> El manual de la aeronave/buque</label>
-                            <label><input type="radio" name="q15" value="c"> Una copia del Código Internacional de Señales</label>
-                        </div>
-                    </div>
-                    <div class="quiz-question">
-                        <p>4. ¿Cuántas frecuencias se deben asignar como mínimo para las comunicaciones en el lugar del siniestro?</p>
-                        <div class="quiz-options">
-                            <label><input type="radio" name="q16" value="a"> Una frecuencia primaria y otra secundaria</label>
-                            <label><input type="radio" name="q16" value="b"> Solo una frecuencia</label>
-                            <label><input type="radio" name="q16" value="c"> Tantas como medios SAR haya</label>
-                        </div>
-                    </div>
-                    <button onclick="checkQuiz(4, {'q13': 'b', 'q14': 'b', 'q15': 'c', 'q16': 'a'})">Verificar Respuestas</button>
-                    <div class="feedback" id="feedback-4"></div>
-                </div>
-                <button onclick="nextModule(4)">Siguiente Módulo</button>
+            <!-- Pantalla de Finalización -->
+            <div id="completion-screen" class="hidden bg-white p-8 rounded-lg shadow-lg text-center">
+                <h2 class="text-3xl font-bold text-green-600 mb-4">¡Felicitaciones!</h2>
+                <p class="text-lg text-gray-600 mb-6">Has completado todos los módulos del Curso Interactivo de Comunicaciones SAR. Ahora tienes una base sólida sobre los procedimientos y tecnologías esenciales para salvar vidas.</p>
+                <p class="text-gray-600 mb-8">Puedes repasar cualquier módulo en el menú de la izquierda.</p>
+                <svg class="w-32 h-32 mx-auto text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
             </div>
-
-            <!-- Módulo 5 -->
-            <div class="module" id="module-5">
-                <h2>Módulo 5: Comunicaciones entre ARCC y ARSC</h2>
-                <p>La comunicación fluida entre los Centros Coordinadores de Salvamento Aeronáutico (ARCC) y los Centros Coordinadores de Salvamento de Subcentro (ARSC) es vital. Los planes nacionales deben asegurar una gestión rápida de las operaciones. Los servicios de teléfono y facsímil son esenciales. Además, la red AFTN/ATN de la OACI es un recurso de gran valor. Los enlaces con los ARCC suelen establecerse a través de los Centros de Información de Vuelo (FIC) o los Centros de Control de Área (CCA) más cercanos. Si el ARCC no está coubicado con estos centros, pueden requerirse circuitos adicionales para garantizar la conectividad.</p>
-                <div class="quiz">
-                    <h3>Test de Autoevaluación</h3>
-                    <div class="quiz-question">
-                        <p>1. ¿Qué deben prever los planes nacionales para la coordinación SAR?</p>
-                        <div class="quiz-options">
-                            <label><input type="radio" name="q17" value="a"> La formación de los controladores aéreos</label>
-                            <label><input type="radio" name="q17" value="b"> La rápida gestión de los asuntos operacionales por el RCC</label>
-                            <label><input type="radio" name="q17" value="c"> La compra de nuevos equipos de radar</label>
-                        </div>
-                    </div>
-                    <div class="quiz-question">
-                        <p>2. ¿Qué sistemas de comunicación son considerados valiosos para los RCC y MCC de Cospas-Sarsat además del teléfono y facsímil?</p>
-                        <div class="quiz-options">
-                            <label><input type="radio" name="q18" value="a"> El correo electrónico</label>
-                            <label><input type="radio" name="q18" value="b"> La red AFTN/ATN de la OACI</label>
-                            <label><input type="radio" name="q18" value="c"> Las redes sociales</p>
-                        </div>
-                    </div>
-                    <div class="quiz-question">
-                        <p>3. ¿Qué ocurre si un ARCC no está ubicado en el mismo lugar que un FIC o CCA?</p>
-                        <div class="quiz-options">
-                            <label><input type="radio" name="q19" value="a"> La comunicación no es posible</label>
-                            <label><input type="radio" name="q19" value="b"> Se deben usar señales de humo</label>
-                            <label><input type="radio" name="q19" value="c"> Pueden ser necesarios circuitos adicionales para interconectarse</label>
-                        </div>
-                    </div>
-                    <div class="quiz-question">
-                        <p>4. ¿Son los servicios de teléfono y facsímil importantes o solo complementarios?</p>
-                        <div class="quiz-options">
-                            <label><input type="radio" name="q20" value="a"> Son esenciales</label>
-                            <label><input type="radio" name="q20" value="b"> Son solo complementarios</label>
-                            <label><input type="radio" name="q20" value="c"> Están obsoletos y no se usan</label>
-                        </div>
-                    </div>
-                    <button onclick="checkQuiz(5, {'q17': 'b', 'q18': 'b', 'q19': 'c', 'q20': 'a'})">Verificar Respuestas</button>
-                    <div class="feedback" id="feedback-5"></div>
-                </div>
-                <button onclick="nextModule(5)">Siguiente Módulo</button>
-            </div>
-
-            <!-- Módulo 6 -->
-            <div class="module" id="module-6">
-                <h2>Módulo 6: Códigos, señales y frases normalizadas</h2>
-                <p>La comunicación efectiva puede verse obstaculizada por barreras lingüísticas. Para mitigar esto, se han desarrollado herramientas como el Código Internacional de Señales, las Frases Normalizadas de la OMI para las Comunicaciones Marítimas (SMCP), y el Anexo 10 de la OACI. Estos documentos proporcionan un lenguaje común y procedimientos estandarizados. Las SMCP, basadas en el inglés, son particularmente importantes para mejorar la seguridad. Aunque el inglés es el idioma de facto, estos códigos son cruciales cuando la comunicación verbal no es posible. El personal SAR debe estar familiarizado con las señales visuales de superficie a aire y de aire a superficie.</p>
-                <div class="quiz">
-                    <h3>Test de Autoevaluación</h3>
-                    <div class="quiz-question">
-                        <p>1. ¿Cuál es el objetivo principal de las SMCP de la OMI?</p>
-                        <div class="quiz-options">
-                            <label><input type="radio" name="q21" value="a"> Reemplazar el idioma inglés</label>
-                            <label><input type="radio" name="q21" value="b"> Mejorar la seguridad normalizando las frases</label>
-                            <label><input type="radio" name="q21" value="c"> Ser usadas solo en emergencias extremas</label>
-                        </div>
-                    </div>
-                    <div class="quiz-question">
-                        <p>2. ¿Qué publicación contiene el alfabeto fonético y la clave de cifras?</p>
-                        <div class="quiz-options">
-                            <label><input type="radio" name="q22" value="a"> El manual IAMSAR</label>
-                            <label><input type="radio" name="q22" value="b"> El Código Internacional de Señales</label>
-                            <label><input type="radio" name="q22" value="c"> El Convenio SOLAS</label>
-                        </div>
-                    </div>
-                    <div class="quiz-question">
-                        <p>3. ¿Qué señal verbal se utiliza para indicar que una nave móvil está en peligro y necesita ayuda inmediata?</p>
-                        <div class="quiz-options">
-                            <label><input type="radio" name="q23" value="a"> PAN-PAN</label>
-                            <label><input type="radio" name="q23" value="b"> SÉCURITÉ</label>
-                            <label><input type="radio" name="q23" value="c"> MAYDAY</label>
-                        </div>
-                    </div>
-                    <div class="quiz-question">
-                        <p>4. ¿Es necesario que el personal del RCC hable inglés?</p>
-                        <div class="quiz-options">
-                            <label><input type="radio" name="q24" value="a"> No, solo el idioma local</label>
-                            <label><input type="radio" name="q24" value="b"> Sí, deben tener un conocimiento práctico del inglés para una comunicación eficaz</label>
-                            <label><input type="radio" name="q24" value="c"> Solo si trabajan con aeronaves extranjeras</label>
-                        </div>
-                    </div>
-                    <button onclick="checkQuiz(6, {'q21': 'b', 'q22': 'b', 'q23': 'c', 'q24': 'b'})">Verificar Respuestas</button>
-                    <div class="feedback" id="feedback-6"></div>
-                </div>
-                <button onclick="nextModule(6)">Siguiente Módulo</button>
-            </div>
-
-            <!-- Módulo 7 -->
-            <div class="module" id="module-7">
-                <h2>Módulo 7: Mensajes de las operaciones SAR</h2>
-                <p>Los mensajes en operaciones SAR deben ser claros, concisos y no requerir claves. Incluyen Informes de Situación (SITREP), mensajes de búsqueda y de salvamento. Los RCC deben usar plantillas normalizadas para agilizar su creación y transmisión. El SITREP es crucial para mantener al SMC (y a otras entidades interesadas) informado sobre el progreso de la misión. Los SITREP iniciales se envían tan pronto como se sepa que se necesita una intervención SAR, y se actualizan a medida que se obtiene más información. Durante operaciones largas, se envían SITREP "sin cambio" cada 3 horas. El formato debe ser homogéneo, especialmente en comunicaciones internacionales.</p>
-                <div class="quiz">
-                    <h3>Test de Autoevaluación</h3>
-                    <div class="quiz-question">
-                        <p>1. ¿Qué es un SITREP?</p>
-                        <div class="quiz-options">
-                            <label><input type="radio" name="q25" value="a"> Un plan de búsqueda detallado</label>
-                            <label><input type="radio" name="q25" value="b"> Un informe sobre la situación para mantener informado al SMC</label>
-                            <label><input type="radio" name="q25" value="c"> Un mensaje de cancelación de la alerta</label>
-                        </div>
-                    </div>
-                    <div class="quiz-question">
-                        <p>2. ¿Con qué frecuencia deben emitirse los SITREP de "sin cambio" durante operaciones prolongadas?</p>
-                        <div class="quiz-options">
-                            <label><input type="radio" name="q26" value="a"> Cada 24 horas</label>
-                            <label><input type="radio" name="q26" value="b"> Cada hora</label>
-                            <label><input type="radio" name="q26" value="c"> A intervalos de unas 3 horas</label>
-                        </div>
-                    </div>
-                    <div class="quiz-question">
-                        <p>3. ¿Qué información clave debe facilitar un SITREP?</p>
-                        <div class="quiz-options">
-                            <label><input type="radio" name="q27" value="a"> Identificación, situación, medidas tomadas, planes ulteriores y estado del caso</label>
-                            <label><input type="radio" name="q27" value="b"> Solo la posición de los medios SAR</label>
-                            <label><input type="radio" name="q27" value="c"> El coste de la operación hasta la fecha</label>
-                        </div>
-                    </div>
-                    <div class="quiz-question">
-                        <p>4. ¿Cuándo debe enviarse el SITREP inicial?</p>
-                        <div class="quiz-options">
-                            <label><input type="radio" name="q28" value="a"> Después de que la operación ha concluido</label>
-                            <label><input type="radio" name="q28" value="b"> En cuanto se conozcan con suficiente claridad los detalles para deducir que es necesaria la intervención del sistema SAR</label>
-                            <label><input type="radio" name="q28" value="c"> Solo cuando el SMC lo solicite explícitamente</label>
-                        </div>
-                    </div>
-                    <button onclick="checkQuiz(7, {'q25': 'b', 'q26': 'c', 'q27': 'a', 'q28': 'b'})">Verificar Respuestas</button>
-                    <div class="feedback" id="feedback-7"></div>
-                </div>
-                <button onclick="nextModule(7)">Siguiente Módulo</button>
-            </div>
-
-            <!-- Fin del curso -->
-            <div class="module" id="module-final">
-                <h2>¡Felicidades!</h2>
-                <p>Has completado el curso de Comunicaciones SAR.</p>
-            </div>
-        </div>
+        </main>
     </div>
 
     <script>
-        const totalModules = 7;
-        let currentModule = 1;
-        let progress = 0;
-
-        function updateProgressBar() {
-            progress = ((currentModule - 1) / totalModules) * 100;
-            const progressBar = document.getElementById('progressBar');
-            progressBar.style.width = progress + '%';
-            progressBar.textContent = Math.round(progress) + '%';
-        }
-
-        function showModule(moduleNumber) {
-            document.querySelectorAll('.module').forEach(module => {
-                module.classList.remove('active');
-            });
-            document.getElementById('module-' + moduleNumber).classList.add('active');
-        }
-
-        function nextModule(moduleNumber) {
-            if (moduleNumber < totalModules) {
-                currentModule = moduleNumber + 1;
-                showModule(currentModule);
-                updateProgressBar();
-            } else if (moduleNumber === totalModules) {
-                document.getElementById('module-final').classList.add('active');
-                document.getElementById('module-' + moduleNumber).classList.remove('active');
-                const progressBar = document.getElementById('progressBar');
-                progressBar.style.width = '100%';
-                progressBar.textContent = '100%';
+        // --- BASE DE DATOS DEL CURSO (FUSIONADA Y COMPLETADA) ---
+        const courseData = [
+            {
+                id: 'module-1',
+                title: 'Servicio fijo aeronáutico',
+                completed: false,
+                summary: `
+                    <p class="mb-4">El servicio fijo aeronáutico es una piedra angular para la coordinación SAR. La <strong>Red de Telecomunicaciones Fijas Aeronáuticas (AFTN)</strong> y su evolución, la <strong>Red de Telecomunicaciones Aeronáuticas (ATN)</strong>, son redes mundiales que aseguran la transmisión de mensajes prioritarios entre centros de control. Para los Centros Coordinadores de Salvamento (RCC) y los Centros de Control de Misiones (MCC) de Cospas-Sarsat, estas redes son vitales porque ofrecen un medio de comunicación fiable y robusto, especialmente en zonas donde otras formas de comunicación podrían ser menos efectivas.</p>
+                     <p class="mb-4">Los enlaces con los Centros Coordinadores de Salvamento Aeronáutico (ARCC) se suelen establecer a través de los servicios disponibles en los <strong>Centros de Información de Vuelo (FIC)</strong> o los <strong>Centros de Control de Área (CCA)</strong> más cercanos, garantizando una integración fluida en la infraestructura de comunicación aeronáutica existente. La OACI ha autorizado el uso de estos sistemas para fines SAR marítimos cuando no se disponga de otros recursos más apropiados, demostrando su versatilidad y criticidad en todo el espectro de operaciones de salvamento.</p>
+                `,
+                questions: [
+                    {
+                        question: "¿Qué redes son fundamentales en el servicio fijo aeronáutico para las comunicaciones SAR?",
+                        options: ["Internet y redes sociales", "AFTN y ATN", "Redes de telefonía móvil"],
+                        answer: 1
+                    },
+                    {
+                        question: "¿Cómo se suelen establecer los enlaces de comunicaciones con un ARCC?",
+                        options: ["A través de los servicios del FIC o CCA más próximos", "Mediante un enlace satelital directo", "Usando la radio de onda corta"],
+                        answer: 0
+                    },
+                    {
+                        question: "¿Cuál es la principal ventaja de la AFTN/ATN para los RCC?",
+                        options: ["Bajo costo", "Capacidad para transmitir video en alta definición", "Fiabilidad para despachar mensajes prioritarios"],
+                        answer: 2
+                    },
+                    {
+                        question: "¿El uso de la AFTN/ATN para fines SAR marítimos está permitido?",
+                        options: ["Sí, cuando no se disponga de otros recursos más apropiados", "No, su uso es exclusivamente aeronáutico", "Sí, es el método preferido para todos los casos SAR"],
+                        answer: 0
+                    }
+                ]
+            },
+            {
+                id: 'module-2',
+                title: 'Comunicaciones de socorro',
+                completed: false,
+                summary: `
+                    <p class="mb-4">El tráfico de socorro abarca todos los mensajes cruciales para la asistencia inmediata a personas, aeronaves o buques en peligro, incluyendo asistencia médica y comunicaciones SAR en el lugar del siniestro. Estas comunicaciones tienen <strong>prioridad absoluta</strong> sobre cualquier otra transmisión. Quien reciba una llamada de socorro debe cesar de inmediato cualquier transmisión que pueda causar interferencia y ponerse a la escucha.</p>
+                    <h4 class="font-semibold text-lg mb-2">Señales de Emergencia Verbales:</h4>
+                    <ul class="list-disc list-inside mb-4 space-y-2">
+                        <li><strong>MAYDAY:</strong> Indica que una nave se encuentra en peligro grave e inminente y necesita ayuda inmediata. Es la máxima prioridad.</li>
+                        <li><strong>PAN-PAN:</strong> Indica una situación de urgencia donde la seguridad de una nave está amenazada, pero no hay un peligro inminente.</li>
+                        <li><strong>SÉCURITÉ:</strong> Se utiliza para mensajes sobre la seguridad de la navegación o avisos meteorológicos importantes.</li>
+                    </ul>
+                    <p class="mb-4">Es fundamental proteger estas comunicaciones contra interferencias perjudiciales. Los alertas pueden llegar al RCC a través de una multitud de canales, incluyendo estaciones costeras (CRS), terminales del sistema Cospas-Sarsat, estaciones terrenas de Inmarsat (LES) y servicios de tránsito aéreo (ATS).</p>
+                `,
+                questions: [
+                    {
+                        question: "¿Qué acción tiene prioridad absoluta sobre todas las demás transmisiones?",
+                        options: ["Las llamadas de urgencia (PAN-PAN)", "Las llamadas de socorro (MAYDAY)", "Las llamadas de seguridad (SÉCURITÉ)"],
+                        answer: 1
+                    },
+                    {
+                        question: "¿Qué debe hacer el personal SAR si causa interferencia en una comunicación de socorro?",
+                        options: ["Ignorarla, ya que tienen prioridad", "Cooperar con las autoridades para denunciar y hacer cesar las interferencias", "Cambiar de frecuencia inmediatamente"],
+                        answer: 1
+                    },
+                    {
+                        question: "¿Qué es un LUT en el contexto de Cospas-Sarsat?",
+                        options: ["Un tipo de radiobaliza de emergencia", "Un terminal local de usuario que recibe señales de satélite", "El centro de control principal del sistema"],
+                        answer: 1
+                    },
+                    {
+                        question: "¿Las aeronaves o buques en peligro pueden usar solo medios de comunicación SAR?",
+                        options: ["Sí, están restringidos a equipos SAR específicos", "No, pueden utilizar cualquier medio disponible para llamar la atención", "Depende de la región en la que se encuentren"],
+                        answer: 1
+                    }
+                ]
+            },
+            {
+                id: 'module-3',
+                title: 'Servicio móvil aeronáutico',
+                completed: false,
+                summary: `
+                    <p class="mb-4">El servicio móvil aeronáutico opera en las bandas de HF (3-30 MHz), VHF (30-300 MHz) y UHF (300-3000 MHz). La comunicación inicial de socorro se hace en la frecuencia en ruta. Si un medio SAR necesita contactar una aeronave en peligro, la frecuencia de contacto inicial suele ser <strong>121,5 MHz</strong> para aeronaves civiles o <strong>243 MHz</strong> para militares.</p>
+                    <p class="mb-4">La frecuencia de 121,5 MHz es crucial y se utiliza para proporcionar un canal expedito entre la aeronave y una estación terrestre, un canal común entre aeronaves y medios de superficie en operaciones SAR, y para localizar la fuente de la señal mediante radiogoniometría. La frecuencia <strong>123,1 MHz</strong> se designa como frecuencia auxiliar para las comunicaciones en el lugar del siniestro.</p>
+                    <p class="mb-4">Una barrera técnica importante es que la telefonía VHF aeronáutica utiliza <strong>modulación de amplitud (AM)</strong>, mientras que la marítima utiliza <strong>modulación de frecuencia (FM)</strong>, lo que impide la comunicación directa sin equipos especiales.</p>
+                `,
+                questions: [
+                    {
+                        question: "¿En qué frecuencia se realizan normally las transmisiones iniciales de socorro aeronáutico?",
+                        options: ["121,5 MHz", "En la frecuencia utilizada para las comunicaciones en ruta", "243 MHz"],
+                        answer: 1
+                    },
+                    {
+                        question: "¿Qué frecuencia se utiliza como canal común entre aeronaves y medios de superficie en operaciones SAR?",
+                        options: ["123,1 MHz", "121,5 MHz", "5680 kHz"],
+                        answer: 1
+                    },
+                    {
+                        question: "¿Qué se puede hacer si se pierden las comunicaciones o el contacto radar con una aeronave?",
+                        options: ["Esperar a que la aeronave restablezca contacto", "Iniciar los procedimientos SAR", "Intentar contactar por teléfono celular"],
+                        answer: 1
+                    },
+                    {
+                        question: "¿Cuál es la principal diferencia técnica entre VHF aeronáutico y marítimo?",
+                        options: ["El alcance", "El tipo de modulación (AM vs FM)", "La potencia de transmisión"],
+                        answer: 1
+                    }
+                ]
+            },
+            {
+                id: 'module-4',
+                title: 'Comunicaciones para Operaciones SAR',
+                completed: false,
+                summary: `
+                    <p class="mb-4">La coordinación eficaz de las comunicaciones es crucial en las operaciones SAR. El plan SAR debe publicar las frecuencias disponibles para los canales de control, en el lugar del siniestro, vigilancia y relaciones públicas. El <strong>SMC (Coordinador de la Misión SAR)</strong> selecciona las frecuencias y las comunica al <strong>OSC (Coordinador en el Lugar del Siniestro)</strong> y al <strong>ACO (Coordinador de Aeronaves)</strong>.</p>
+                    <p class="mb-4">Se debe asignar una frecuencia primaria y otra secundaria. El OSC y/o el ACO controlan las comunicaciones en el lugar del siniestro para garantizar que sean fiables. Todas las SRU (Unidades de Búsqueda y Salvamento) deben llevar una copia del <strong>Código Internacional de Señales</strong>, que contiene información sobre comunicaciones reconocida internacionalmente.</p>
+                `,
+                questions: [
+                    {
+                        question: "¿Quién designa las frecuencias para la operación SAR?",
+                        options: ["El piloto de la aeronave en peligro", "El SMC (Coordinador de la Misión SAR)", "El capitán del buque más cercano"],
+                        answer: 1
+                    },
+                    {
+                        question: "¿Quién controla las comunicaciones en el lugar del siniestro?",
+                        options: ["El SMC desde el RCC", "El OSC y/o el ACO", "La estación costera más próxima"],
+                        answer: 1
+                    },
+                    {
+                        question: "¿Qué documento importante deben llevar todas las Unidades de Búsqueda y Salvamento (SRU)?",
+                        options: ["Un mapa de la zona", "El manual de la aeronave/buque", "Una copia del Código Internacional de Señales"],
+                        answer: 2
+                    }
+                ]
+            },
+            {
+                id: 'module-5',
+                title: 'Comunicaciones entre ARCC y ARSC',
+                completed: false,
+                summary: `
+                    <p class="mb-4">La comunicación fluida entre los Centros Coordinadores de Salvamento Aeronáutico (ARCC) y los Centros Coordinadores de Salvamento de Subcentro (ARSC) es vital. Los planes nacionales deben asegurar una gestión rápida de las operaciones. Los servicios de <strong>teléfono y facsímil son esenciales</strong>.</p>
+                    <p class="mb-4">Además, la red <strong>AFTN/ATN</strong> de la OACI es un recurso de gran valor. Los enlaces con los ARCC suelen establecerse a través de los Centros de Información de Vuelo (FIC) o los Centros de Control de Área (CCA) más cercanos. Si el ARCC no está coubicado con estos centros, pueden requerirse circuitos adicionales para garantizar la conectividad.</p>
+                `,
+                questions: [
+                    {
+                        question: "¿Qué deben prever los planes nacionales para la coordinación SAR?",
+                        options: ["La construcción de nuevos aeropuertos", "La rápida gestión de los asuntos operacionales por el RCC", "La formación de pilotos"],
+                        answer: 1
+                    },
+                    {
+                        question: "¿Qué sistemas de comunicación son considerados valiosos para los RCC además del teléfono y facsímil?",
+                        options: ["El correo electrónico", "La red AFTN/ATN de la OACI", "Las redes sociales"],
+                        answer: 1
+                    },
+                    {
+                        question: "¿Qué ocurre si un ARCC no está ubicado en el mismo lugar que un FIC o CCA?",
+                        options: ["La comunicación no es posible", "Se deben usar señales de humo", "Pueden ser necesarios circuitos adicionales para interconectarse"],
+                        answer: 2
+                    }
+                ]
+            },
+            {
+                id: 'module-6',
+                title: 'Códigos, señales y frases normalizadas',
+                completed: false,
+                summary: `
+                    <p class="mb-4">La comunicación efectiva puede verse obstaculizada por barreras lingüísticas. Para mitigar esto, se han desarrollado herramientas como el <strong>Código Internacional de Señales</strong>, las <strong>Frases Normalizadas de la OMI para las Comunicaciones Marítimas (SMCP)</strong>, y el Anexo 10 de la OACI. Estos documentos proporcionan un lenguaje común y procedimientos estandarizados.</p>
+                    <p class="mb-4">Las SMCP, basadas en el inglés, son particularmente importantes para mejorar la seguridad. Aunque el inglés es el idioma de facto, estos códigos son cruciales cuando la comunicación verbal no es posible. El personal SAR debe estar familiarizado con las señales visuales de superficie a aire y de aire a superficie para comunicarse con los supervivientes.</p>
+                `,
+                questions: [
+                    {
+                        question: "¿Cuál es el objetivo principal de las SMCP de la OMI?",
+                        options: ["Reemplazar el idioma inglés", "Mejorar la seguridad normalizando las frases", "Ser usadas solo en emergencias extremas"],
+                        answer: 1
+                    },
+                    {
+                        question: "¿Qué publicación contiene el alfabeto fonético y la clave de cifras?",
+                        options: ["El manual IAMSAR", "El Código Internacional de Señales", "El Convenio SOLAS"],
+                        answer: 1
+                    },
+                    {
+                        question: "¿Qué señal verbal se utiliza para indicar que una nave móvil está en peligro y necesita ayuda inmediata?",
+                        options: ["PAN-PAN", "SÉCURITÉ", "MAYDAY"],
+                        answer: 2
+                    },
+                    {
+                        question: "¿Es necesario que el personal del RCC hable inglés?",
+                        options: ["No, solo el idioma local", "Sí, deben tener un conocimiento práctico del inglés para una comunicación eficaz", "Solo si trabajan con aeronaves extranjeras"],
+                        answer: 1
+                    }
+                ]
+            },
+            {
+                id: 'module-7',
+                title: 'Mensajes de las operaciones SAR',
+                completed: false,
+                summary: `
+                    <p class="mb-4">Los mensajes en operaciones SAR deben ser claros, concisos y no requerir claves. Incluyen <strong>Informes de Situación (SITREP)</strong>, mensajes de búsqueda y de salvamento. Los RCC deben usar plantillas normalizadas para agilizar su creación y transmisión.</p>
+                    <p class="mb-4">El SITREP es crucial para mantener al SMC (y a otras entidades interesadas) informado sobre el progreso de la misión. Los SITREP iniciales se envían tan pronto como se sepa que se necesita una intervención SAR, y se actualizan a medida que se obtiene más información. Durante operaciones largas, se envían SITREP "sin cambio" <strong>cada 3 horas</strong>. El formato debe ser homogéneo, especialmente en comunicaciones internacionales, y debe incluir secciones como: Identificación, Situación, Medidas Tomadas, Planes Ulteriores y Estado del Caso.</p>
+                `,
+                questions: [
+                    {
+                        question: "¿Qué es un SITREP?",
+                        options: ["Un plan de búsqueda detallado", "Un informe sobre la situación para mantener informado al SMC", "Un mensaje de cancelación de la alerta"],
+                        answer: 1
+                    },
+                    {
+                        question: "¿Con qué frecuencia deben emitirse los SITREP de \"sin cambio\" durante operaciones prolongadas?",
+                        options: ["Cada 24 horas", "Cada hora", "A intervalos de unas 3 horas"],
+                        answer: 2
+                    },
+                    {
+                        question: "¿Qué información clave debe facilitar un SITREP?",
+                        options: ["Identificación, situación, medidas tomadas, planes ulteriores y estado del caso", "Solo la posición de los medios SAR", "El coste de la operación hasta la fecha"],
+                        answer: 0
+                    },
+                    {
+                        question: "¿Cuándo debe enviarse el SITREP inicial?",
+                        options: ["Después de que la operación ha concluido", "En cuanto se deduzca que es necesaria la intervención del sistema SAR", "Solo cuando el SMC lo solicite explícitamente"],
+                        answer: 1
+                    }
+                ]
             }
-        }
+        ];
 
-        function checkQuiz(moduleNumber, correctAnswers) {
-            const feedbackEl = document.getElementById('feedback-' + moduleNumber);
-            let score = 0;
-            let totalQuestions = Object.keys(correctAnswers).length;
+        // --- LÓGICA DE LA APLICACIÓN ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const navContainer = document.getElementById('module-nav');
+            const modulesContainer = document.getElementById('modules-container');
+            const welcomeScreen = document.getElementById('welcome-screen');
+            const completionScreen = document.getElementById('completion-screen');
+            const progressBar = document.getElementById('progress-bar');
 
-            for (const question in correctAnswers) {
-                const selectedOption = document.querySelector('input[name="' + question + '"]:checked');
-                if (selectedOption && selectedOption.value === correctAnswers[question]) {
-                    score++;
+            // 1. Renderizar la navegación y los módulos
+            courseData.forEach((module, index) => {
+                // Crear enlace de navegación
+                const navLink = document.createElement('a');
+                navLink.href = '#';
+                navLink.className = 'nav-link block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700 hover:text-white';
+                navLink.textContent = `Módulo ${index + 1}: ${module.title}`;
+                navLink.dataset.moduleId = module.id;
+                navContainer.appendChild(navLink);
+
+                // Crear contenedor del módulo
+                const moduleDiv = document.createElement('div');
+                moduleDiv.id = module.id;
+                moduleDiv.className = 'module-content bg-white p-6 md:p-8 rounded-lg shadow-lg';
+                
+                let questionsHTML = module.questions.map((q, qIndex) => `
+                    <div class="mb-6">
+                        <p class="font-semibold mb-2">${qIndex + 1}. ${q.question}</p>
+                        <div class="space-y-2">
+                            ${q.options.map((opt, oIndex) => `
+                                <label class="quiz-option block p-3 border-2 border-gray-200 rounded-lg cursor-pointer">
+                                    <input type="radio" name="q${qIndex}-${module.id}" value="${oIndex}" class="mr-2">
+                                    ${opt}
+                                </label>
+                            `).join('')}
+                        </div>
+                    </div>
+                `).join('');
+
+                moduleDiv.innerHTML = `
+                    <h2 class="text-2xl md:text-3xl font-bold mb-4">${module.title}</h2>
+                    <div class="prose max-w-none text-gray-700 mb-8">${module.summary}</div>
+                    <hr class="my-8">
+                    <h3 class="text-xl font-bold mb-4">Autoevaluación</h3>
+                    <form class="quiz-form" data-module-id="${module.id}">
+                        ${questionsHTML}
+                        <button type="submit" class="bg-blue-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-blue-700 transition duration-200">Verificar Respuestas</button>
+                    </form>
+                    <div class="quiz-results mt-6"></div>
+                `;
+                modulesContainer.appendChild(moduleDiv);
+            });
+
+            // 2. Manejar la navegación
+            navContainer.addEventListener('click', (e) => {
+                if (e.target.closest('.nav-link')) {
+                    e.preventDefault();
+                    const navLink = e.target.closest('.nav-link');
+                    const moduleId = navLink.dataset.moduleId;
+                    showModule(moduleId);
+                }
+            });
+
+            function showModule(moduleId) {
+                welcomeScreen.style.display = 'none';
+                completionScreen.classList.add('hidden');
+                
+                document.querySelectorAll('.module-content').forEach(m => m.classList.remove('active'));
+                document.getElementById(moduleId).classList.add('active');
+                
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                document.querySelector(`.nav-link[data-module-id="${moduleId}"]`).classList.add('active');
+            }
+
+            // 3. Manejar la lógica de los cuestionarios
+            modulesContainer.addEventListener('submit', (e) => {
+                if (e.target.classList.contains('quiz-form')) {
+                    e.preventDefault();
+                    const moduleId = e.target.dataset.moduleId;
+                    checkQuiz(moduleId, e.target);
+                }
+            });
+            
+            modulesContainer.addEventListener('change', e => {
+                if (e.target.type === 'radio') {
+                    const questionContainer = e.target.closest('.space-y-2');
+                    questionContainer.querySelectorAll('label').forEach(label => label.classList.remove('selected'));
+                    e.target.parentElement.classList.add('selected');
+                }
+            });
+
+            function checkQuiz(moduleId, form) {
+                const module = courseData.find(m => m.id === moduleId);
+                const resultsContainer = form.nextElementSibling;
+                let score = 0;
+                
+                module.questions.forEach((q, qIndex) => {
+                    const selectedOption = form.querySelector(`input[name="q${qIndex}-${module.id}"]:checked`);
+                    const optionLabels = form.querySelectorAll(`input[name="q${qIndex}-${module.id}"]`);
+                    
+                    optionLabels.forEach((labelInput, labelIndex) => {
+                        const parentLabel = labelInput.parentElement;
+                        parentLabel.classList.remove('selected', 'incorrect', 'correct');
+                        if (labelIndex === q.answer) {
+                            parentLabel.classList.add('correct');
+                        }
+                    });
+
+                    if (selectedOption) {
+                        const selectedValue = parseInt(selectedOption.value);
+                        if (selectedValue === q.answer) {
+                            score++;
+                        } else {
+                            selectedOption.parentElement.classList.add('incorrect');
+                        }
+                    }
+                });
+
+                const percentage = Math.round((score / module.questions.length) * 100);
+                resultsContainer.innerHTML = `<p class="text-lg font-bold">Tu resultado: ${score} de ${module.questions.length} correctas (${percentage}%)</p>`;
+                
+                if (percentage >= 75) {
+                     resultsContainer.innerHTML += `<p class="text-green-600 mt-2">¡Excelente! Módulo superado.</p>`;
+                    if (!module.completed) {
+                        module.completed = true;
+                        updateProgressBar();
+                    }
+                } else {
+                    resultsContainer.innerHTML += `<p class="text-red-600 mt-2">Necesitas repasar el contenido. Inténtalo de nuevo si es necesario.</p>`;
+                }
+
+                form.querySelector('button').disabled = true;
+                form.querySelectorAll('input[type=radio]').forEach(radio => radio.disabled = true);
+            }
+
+            // 4. Actualizar la barra de progreso
+            function updateProgressBar() {
+                const completedModules = courseData.filter(m => m.completed).length;
+                const totalModules = courseData.length;
+                const progressPercentage = Math.round((completedModules / totalModules) * 100);
+
+                const progressBarFill = document.getElementById('progress-bar');
+                progressBarFill.style.width = `${progressPercentage}%`;
+                progressBarFill.textContent = `${progressPercentage}%`;
+                
+                courseData.forEach(module => {
+                    const navLink = document.querySelector(`.nav-link[data-module-id="${module.id}"]`);
+                    const existingCheck = navLink.querySelector('.check-icon');
+                    if (existingCheck) existingCheck.remove();
+
+                    if (module.completed) {
+                        const checkIcon = document.createElement('span');
+                        checkIcon.className = 'check-icon text-green-400 ml-2';
+                        checkIcon.textContent = '✓';
+                        navLink.appendChild(checkIcon);
+                    }
+                });
+
+                if (completedModules === totalModules) {
+                    setTimeout(() => {
+                        document.querySelectorAll('.module-content').forEach(m => m.classList.remove('active'));
+                        completionScreen.classList.remove('hidden');
+                    }, 1000);
                 }
             }
-
-            feedbackEl.textContent = 'Tu puntuación: ' + score + ' de ' + totalQuestions;
-            if (score === totalQuestions) {
-                feedbackEl.style.color = 'green';
-            } else {
-                feedbackEl.style.color = 'red';
-            }
-        }
-
-        // Inicializar
-        updateProgressBar();
+        });
     </script>
 
 </body>
